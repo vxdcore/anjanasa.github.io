@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anjana S Anand — Designer</title>
+<meta name="description" content="Anjana S Anand — Industrial & Accessory Designer, NIFT Mumbai.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Cinzel:wght@400;500&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0E0B08;--ink2:#161109;
+  --rust:#7A3B1E;--amber:#C17B3A;--gold:#B89A5A;
+  --sand:#D9C4A4;--parch:#EDE4D3;--cream:#F5EFE4;
+  --muted:#7A6A58;--lite:#A08870;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--ink);color:var(--cream);font-family:'DM Mono',monospace;font-size:12px;line-height:1.7;overflow-x:hidden;cursor:none;}
+
+/* CURSOR */
+#cur{position:fixed;width:6px;height:6px;background:var(--amber);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cur-r{position:fixed;width:28px;height:28px;border:1px solid rgba(193,123,58,0.45);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,border-color 0.3s;}
+body:has(a:hover) #cur-r,body:has(button:hover) #cur-r{width:52px;height:52px;border-color:var(--amber);}
+
+/* GRAIN */
+.grain{position:fixed;inset:0;z-index:8000;pointer-events:none;opacity:0.055;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px;}
+
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--ink);z-index:7000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:32px;transition:opacity 0.9s ease,visibility 0.9s;}
+#loader.gone{opacity:0;visibility:hidden;}
+.l-name{font-family:'Cormorant',serif;font-size:clamp(56px,10vw,110px);font-weight:300;font-style:italic;color:var(--amber);letter-spacing:0.04em;}
+.l-bar{width:200px;height:1px;background:rgba(255,255,255,0.08);overflow:hidden;}
+.l-fill{height:1px;background:var(--amber);width:0;transition:width 1.5s ease;}
+.l-sub{font-size:8px;letter-spacing:0.42em;text-transform:uppercase;color:var(--lite);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:30px 72px;transition:all 0.5s;}
+nav.solid{background:rgba(14,11,8,0.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(184,154,90,0.1);padding:18px 72px;}
+.nav-logo{font-family:'Cinzel',serif;font-size:13px;letter-spacing:0.24em;color:var(--cream);text-decoration:none;}
+.nav-links{display:flex;gap:44px;list-style:none;}
+.nav-links a{text-decoration:none;color:var(--lite);font-size:8.5px;letter-spacing:0.32em;text-transform:uppercase;transition:color 0.3s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--amber);transition:width 0.3s;}
+.nav-links a:hover{color:var(--amber);}
+.nav-links a:hover::after{width:100%;}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:none;padding:4px;}
+.hbg span{display:block;width:22px;height:1px;background:var(--cream);transition:all 0.3s;}
+
+/* HERO */
+.hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:flex-end;}
+.h-glow{position:absolute;width:900px;height:900px;background:radial-gradient(ellipse,rgba(122,59,30,0.3) 0%,transparent 65%);top:-300px;right:-300px;pointer-events:none;}
+.h-glow2{position:absolute;width:600px;height:600px;background:radial-gradient(ellipse,rgba(193,123,58,0.1) 0%,transparent 70%);bottom:-100px;left:0;pointer-events:none;}
+.h-bg-txt{position:absolute;bottom:-100px;left:-30px;font-family:'Cormorant',serif;font-size:clamp(180px,28vw,380px);font-weight:300;font-style:italic;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(184,154,90,0.09);pointer-events:none;white-space:nowrap;letter-spacing:-0.05em;user-select:none;}
+.h-vert{position:absolute;right:72px;top:50%;transform:translateY(-50%) rotate(90deg);font-size:8px;letter-spacing:0.42em;text-transform:uppercase;color:rgba(184,154,90,0.3);white-space:nowrap;}
+.h-content{position:relative;z-index:10;padding:0 80px 100px;width:100%;display:grid;grid-template-columns:1fr 260px;gap:80px;align-items:flex-end;}
+.h-eyebrow{display:flex;align-items:center;gap:18px;margin-bottom:30px;opacity:0;animation:fadeUp 1s 1.8s cubic-bezier(0.22,1,0.36,1) forwards;}
+.h-dash{width:52px;height:1px;background:var(--amber);}
+.h-tag{font-size:8.5px;letter-spacing:0.38em;text-transform:uppercase;color:var(--amber);}
+.h-name{font-family:'Cormorant',serif;font-size:clamp(68px,10vw,140px);font-weight:300;line-height:0.88;letter-spacing:-0.01em;margin-bottom:6px;opacity:0;animation:fadeUp 1s 1.95s cubic-bezier(0.22,1,0.36,1) forwards;}
+.h-name em{font-style:italic;color:var(--amber);display:block;}
+.h-sub{font-family:'Cormorant',serif;font-size:21px;font-weight:300;color:var(--lite);letter-spacing:0.07em;margin-bottom:50px;opacity:0;animation:fadeUp 1s 2.1s cubic-bezier(0.22,1,0.36,1) forwards;}
+.h-desc{max-width:430px;color:var(--muted);font-size:11.5px;line-height:2.2;margin-bottom:56px;opacity:0;animation:fadeUp 1s 2.25s cubic-bezier(0.22,1,0.36,1) forwards;}
+.h-btns{display:flex;gap:28px;align-items:center;opacity:0;animation:fadeUp 1s 2.4s cubic-bezier(0.22,1,0.36,1) forwards;}
+.btn-fill{display:inline-block;text-decoration:none;font-size:8.5px;letter-spacing:0.28em;text-transform:uppercase;padding:18px 40px;border:1px solid var(--amber);color:var(--ink);background:var(--amber);transition:all 0.4s;}
+.btn-fill:hover{background:transparent;color:var(--amber);}
+.btn-line{display:inline-block;text-decoration:none;font-size:8.5px;letter-spacing:0.28em;text-transform:uppercase;color:var(--lite);border-bottom:1px solid rgba(160,136,112,0.3);padding-bottom:2px;transition:all 0.3s;}
+.btn-line:hover{color:var(--cream);border-color:var(--cream);}
+.h-deco{opacity:0;animation:fadeUp 1s 2.2s cubic-bezier(0.22,1,0.36,1) forwards;align-self:flex-end;}
+.deco-frame{border:1px solid rgba(184,154,90,0.25);padding:32px 26px;position:relative;}
+.deco-frame::before{content:'';position:absolute;inset:7px;border:1px solid rgba(184,154,90,0.1);}
+.deco-mono{font-family:'Cormorant',serif;font-size:64px;font-weight:300;font-style:italic;color:var(--amber);opacity:0.1;text-align:center;line-height:1;margin-bottom:18px;letter-spacing:-0.04em;}
+.deco-tags{display:flex;flex-direction:column;gap:5px;}
+.deco-t{font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--lite);padding:8px 10px;border:1px solid rgba(184,154,90,0.12);text-align:center;transition:all 0.3s;}
+.deco-t:hover{border-color:var(--amber);color:var(--amber);}
+.deco-yr{font-family:'Cormorant',serif;font-size:44px;font-weight:300;color:var(--amber);opacity:0.08;position:absolute;bottom:10px;right:14px;line-height:1;}
+
+/* MARQUEE */
+.mq-wrap{overflow:hidden;border-top:1px solid rgba(184,154,90,0.08);border-bottom:1px solid rgba(184,154,90,0.08);padding:16px 0;background:rgba(255,255,255,0.015);}
+.mq{display:flex;gap:64px;white-space:nowrap;animation:mq 30s linear infinite;width:max-content;}
+.mq-i{display:flex;align-items:center;gap:28px;font-size:8.5px;letter-spacing:0.32em;text-transform:uppercase;color:var(--muted);}
+.mq-dot{width:3px;height:3px;border-radius:50%;background:var(--amber);flex-shrink:0;}
+@keyframes mq{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* SECTION */
+section{padding:130px 80px;}
+.s-hd{display:flex;align-items:baseline;gap:28px;margin-bottom:90px;}
+.s-n{font-size:8.5px;letter-spacing:0.32em;color:var(--amber);text-transform:uppercase;flex-shrink:0;}
+.s-t{font-family:'Cormorant',serif;font-size:clamp(44px,5.5vw,76px);font-weight:300;line-height:1;color:var(--cream);}
+.s-t em{font-style:italic;color:var(--amber);}
+.s-r{flex:1;height:1px;background:linear-gradient(to right,rgba(184,154,90,0.2),transparent);}
+.rv{opacity:0;transform:translateY(40px);transition:opacity 0.9s cubic-bezier(0.22,1,0.36,1),transform 0.9s cubic-bezier(0.22,1,0.36,1);}
+.rv.on{opacity:1;transform:none;}
+
+/* ABOUT */
+#about{background:var(--ink2);position:relative;overflow:hidden;}
+#about::before{content:'ABOUT';position:absolute;right:-80px;top:50%;transform:translateY(-50%);font-family:'Cormorant',serif;font-size:240px;font-weight:300;color:transparent;-webkit-text-stroke:1px rgba(184,154,90,0.04);pointer-events:none;white-space:nowrap;user-select:none;}
+.ab-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start;}
+.ab-p{font-size:12.5px;color:var(--muted);line-height:2.3;margin-bottom:24px;}
+.ot-box{margin-top:44px;padding:28px 32px;border-left:2px solid var(--amber);background:rgba(193,123,58,0.05);}
+.ot-lbl{font-size:7.5px;letter-spacing:0.38em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;}
+.ot-txt{font-family:'Cormorant',serif;font-size:19px;font-weight:300;font-style:italic;color:var(--sand);line-height:1.8;}
+.sk-lbl{font-size:7.5px;letter-spacing:0.32em;text-transform:uppercase;color:var(--lite);margin-bottom:18px;}
+.sk-mosaic{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(184,154,90,0.08);border:1px solid rgba(184,154,90,0.08);}
+.sk-tile{background:var(--ink2);padding:18px 16px;font-size:8.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);transition:all 0.35s;cursor:default;position:relative;overflow:hidden;}
+.sk-tile::after{content:'';position:absolute;inset:0;background:var(--amber);transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.22,1,0.36,1);z-index:0;}
+.sk-tile span{position:relative;z-index:1;transition:color 0.35s;}
+.sk-tile:hover::after{transform:translateY(0);}
+.sk-tile:hover span{color:var(--ink);}
+
+/* EXPERIENCE */
+#experience{background:var(--ink);}
+.exp-row{display:grid;grid-template-columns:44px 1px 1fr;gap:0 38px;padding:54px 0;border-bottom:1px solid rgba(184,154,90,0.07);}
+.exp-row:first-child{border-top:1px solid rgba(184,154,90,0.07);}
+.exp-idx{font-family:'Cormorant',serif;font-size:11px;font-weight:300;font-style:italic;color:rgba(184,154,90,0.25);padding-top:4px;}
+.exp-spine{display:flex;flex-direction:column;align-items:center;}
+.exp-dot{width:7px;height:7px;border:1px solid rgba(184,154,90,0.4);border-radius:50%;flex-shrink:0;margin-top:6px;transition:all 0.3s;}
+.exp-row:hover .exp-dot{background:var(--amber);border-color:var(--amber);box-shadow:0 0 14px rgba(193,123,58,0.5);}
+.exp-spine-line{flex:1;width:1px;background:rgba(184,154,90,0.08);}
+.exp-meta{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;flex-wrap:wrap;gap:8px;}
+.exp-co{font-family:'Cormorant',serif;font-size:26px;font-weight:400;color:var(--cream);transition:color 0.3s;}
+.exp-row:hover .exp-co{color:var(--amber);}
+.exp-date{font-size:8.5px;letter-spacing:0.22em;color:var(--amber);text-transform:uppercase;}
+.exp-role{font-size:8.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--lite);margin-bottom:22px;}
+.exp-pts{list-style:none;display:flex;flex-direction:column;gap:11px;}
+.exp-pts li{font-size:11.5px;color:var(--muted);line-height:1.9;padding-left:20px;position:relative;}
+.exp-pts li::before{content:'↳';position:absolute;left:0;color:rgba(184,154,90,0.35);font-size:10px;}
+
+/* TOOLS */
+#tools{background:var(--ink2);position:relative;overflow:hidden;}
+#tools::before{content:'';position:absolute;width:650px;height:650px;border-radius:50%;background:radial-gradient(ellipse,rgba(122,59,30,0.18) 0%,transparent 70%);bottom:-250px;right:-150px;pointer-events:none;}
+.tools-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:60px;}
+.t-pill{padding:14px 26px;border:1px solid rgba(184,154,90,0.18);font-size:8.5px;letter-spacing:0.22em;text-transform:uppercase;color:var(--lite);position:relative;overflow:hidden;cursor:default;transition:color 0.35s,border-color 0.35s;}
+.t-pill::before{content:'';position:absolute;inset:0;background:rgba(193,123,58,0.1);transform:scale(0);border-radius:50%;transition:transform 0.5s cubic-bezier(0.22,1,0.36,1);}
+.t-pill:hover{color:var(--amber);border-color:var(--amber);}
+.t-pill:hover::before{transform:scale(3);}
+.t-pill span{position:relative;z-index:1;}
+.lang-sec{border-top:1px solid rgba(184,154,90,0.08);padding-top:48px;}
+.lang-lbl{font-size:7.5px;letter-spacing:0.38em;text-transform:uppercase;color:var(--amber);margin-bottom:18px;}
+.lang-row{display:flex;gap:6px;flex-wrap:wrap;}
+.lang-p{padding:9px 22px;border:1px solid rgba(184,154,90,0.1);font-size:8.5px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(160,136,112,0.5);}
+
+/* EDUCATION */
+#education{background:var(--ink);}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.edu-card{position:relative;overflow:hidden;padding:64px 54px;border:1px solid rgba(184,154,90,0.08);cursor:default;isolation:isolate;background:var(--ink2);}
+.edu-card::after{content:'';position:absolute;inset:0;background:var(--rust);transform:translateY(101%);transition:transform 0.65s cubic-bezier(0.22,1,0.36,1);z-index:0;}
+.edu-card:hover::after{transform:translateY(0);}
+.edu-card>*{position:relative;z-index:1;}
+.edu-deg{font-family:'Cormorant',serif;font-size:31px;font-weight:300;color:var(--cream);line-height:1.2;margin-bottom:14px;transition:color 0.3s;}
+.edu-deg em{font-style:italic;color:var(--amber);}
+.edu-card:hover .edu-deg em{color:var(--sand);}
+.edu-inst{font-size:8.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);line-height:2;transition:color 0.3s;}
+.edu-card:hover .edu-inst{color:rgba(245,239,228,0.7);}
+.edu-yr{font-family:'Cormorant',serif;font-size:92px;font-weight:300;color:var(--amber);opacity:0.07;position:absolute;bottom:12px;right:24px;line-height:1;transition:all 0.3s;}
+.edu-card:hover .edu-yr{opacity:0.15;color:var(--cream);}
+
+/* CONTACT */
+#contact{background:var(--ink2);position:relative;overflow:hidden;}
+#contact::before{content:'';position:absolute;width:750px;height:750px;border-radius:50%;background:radial-gradient(ellipse,rgba(122,59,30,0.22) 0%,transparent 70%);top:-350px;left:-250px;pointer-events:none;}
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start;}
+.ct-pull{font-family:'Cormorant',serif;font-size:clamp(24px,3vw,38px);font-weight:300;font-style:italic;color:var(--sand);line-height:1.6;position:relative;padding-left:34px;}
+.ct-pull::before{content:'"';position:absolute;left:-10px;top:-20px;font-size:110px;color:var(--amber);opacity:0.15;font-style:normal;line-height:1;}
+.ct-list{display:flex;flex-direction:column;}
+.ct-item{display:flex;flex-direction:column;gap:6px;padding:22px 0;border-bottom:1px solid rgba(184,154,90,0.07);}
+.ct-item:first-child{border-top:1px solid rgba(184,154,90,0.07);}
+.ct-lbl{font-size:7.5px;letter-spacing:0.42em;text-transform:uppercase;color:var(--amber);}
+.ct-val{font-size:14px;color:var(--cream);text-decoration:none;transition:color 0.3s;letter-spacing:0.02em;}
+.ct-val:hover{color:var(--amber);}
+
+/* FOOTER */
+footer{background:var(--ink);border-top:1px solid rgba(184,154,90,0.08);padding:40px 80px;display:flex;justify-content:space-between;align-items:center;}
+.ft-logo{font-family:'Cinzel',serif;font-size:13px;letter-spacing:0.24em;color:var(--amber);}
+footer span{font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(32px);}to{opacity:1;transform:translateY(0);}}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  nav{padding:22px 36px;}nav.solid{padding:15px 36px;}
+  .nav-links{display:none;}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;inset:0;background:rgba(14,11,8,0.97);align-items:center;justify-content:center;gap:48px;z-index:490;}
+  .nav-links.open a{font-size:14px;}
+  .hbg{display:flex;}
+  .h-content{grid-template-columns:1fr;padding:0 36px 84px;}
+  .h-deco{display:none;}
+  .h-vert{display:none;}
+  section{padding:90px 32px;}
+  .ab-grid,.edu-grid,.ct-grid{grid-template-columns:1fr;gap:60px;}
+  .exp-row{grid-template-columns:32px 1px 1fr;gap:0 22px;}
+  footer{flex-direction:column;gap:12px;padding:28px 32px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+<div class="grain"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="l-name">ASA</div>
+  <div class="l-bar"><div class="l-fill" id="lbar"></div></div>
+  <div class="l-sub">Loading portfolio</div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#home" class="nav-logo">Anjana S Anand</a>
+  <ul class="nav-links" id="nl">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hbg" id="hbg" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="h-glow"></div>
+  <div class="h-glow2"></div>
+  <div class="h-bg-txt">ASA</div>
+  <div class="h-vert">Industrial &amp; Accessory Design · Mumbai</div>
+  <div class="h-content">
+    <div>
+      <div class="h-eyebrow">
+        <div class="h-dash"></div>
+        <span class="h-tag">Industrial &amp; Accessory Designer</span>
+      </div>
+      <h1 class="h-name">Anjana<em>S Anand</em></h1>
+      <p class="h-sub">NIFT Mumbai &nbsp;·&nbsp; Class of 2025</p>
+      <p class="h-desc">Creative designer with 3+ years across fashion accessories, leather goods, and lifestyle products — from trend research and concept sketching to prototyping and production handoff.</p>
+      <div class="h-btns">
+        <a href="#experience" class="btn-fill">View Experience</a>
+        <a href="#contact" class="btn-line">Get in Touch →</a>
+      </div>
+    </div>
+    <div class="h-deco">
+      <div class="deco-frame">
+        <div class="deco-mono">ASA</div>
+        <div class="deco-tags">
+          <div class="deco-t">Accessories Design</div>
+          <div class="deco-t">Leather Craft</div>
+          <div class="deco-t">CMF &amp; Prototyping</div>
+          <div class="deco-t">Trend Forecasting</div>
+          <div class="deco-t">Art Direction</div>
+        </div>
+        <div class="deco-yr">25</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq-wrap">
+  <div class="mq" id="mq">
+    <div class="mq-i"><span>Accessories Design</span><div class="mq-dot"></div></div>
+    <div class="mq-i"><span>Leather Craft</span><div class="mq-dot"></div></div>
+    <div class="mq-i"><span>Trend Forecasting</span><div class="mq-dot"></div></div>
+    <div class="mq-i"><span>CMF</span><div class="mq-dot"></div></div>
+    <div class="mq-i"><span>Pattern Making</span><div class="mq-dot"></div></div>
+    <div class="mq-i"><span>Prototyping</span><div class="mq-dot"></div></div>
+    <div class="mq-i"><span>Art Direction</span><div class="mq-dot"></div></div>
+    <div class="mq-i"><span>Material Sourcing</span><div class="mq-dot"></div></div>
+    <div class="mq-i"><span>NIFT Mumbai</span><div class="mq-dot"></div></div>
+    <div class="mq-i"><span>Accessories Design</span><div class="mq-dot"></div></div>
+    <div class="mq-i"><span>Leather Craft</span><div class="mq-dot"></div></div>
+    <div class="mq-i"><span>Trend Forecasting</span><div class="mq-dot"></div></div>
+    <div class="mq-i"><span>CMF</span><div class="mq-dot"></div></div>
+    <div class="mq-i"><span>Pattern Making</span><div class="mq-dot"></div></div>
+    <div class="mq-i"><span>Prototyping</span><div class="mq-dot"></div></div>
+    <div class="mq-i"><span>Art Direction</span><div class="mq-dot"></div></div>
+    <div class="mq-i"><span>Material Sourcing</span><div class="mq-dot"></div></div>
+    <div class="mq-i"><span>NIFT Mumbai</span><div class="mq-dot"></div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="s-hd rv"><span class="s-n">01 /</span><h2 class="s-t">About <em>Me</em></h2><div class="s-r"></div></div>
+  <div class="ab-grid">
+    <div class="rv">
+      <p class="ab-p">I'm an Industrial &amp; Accessory Designer, graduated from the National Institute of Fashion Technology (NIFT), Mumbai. My practice spans fashion accessories, leather goods, and lifestyle products — bridging cultural craft traditions with contemporary design sensibility.</p>
+      <p class="ab-p">From collaborating directly with artisans at the Kolhapuri Chappal Craft Cluster to leading art direction at a premium lifestyle brand, I bring both cultural sensitivity and commercial pragmatism to every project.</p>
+      <p class="ab-p">Skilled in CMF, concept development, sketching, and prototyping — I design from first idea to finished object, balancing aesthetic vision with commercial viability.</p>
+      <div class="ot-box">
+        <div class="ot-lbl">Currently Open To</div>
+        <div class="ot-txt">Graphic Designer · Freelance Photographer<br>Accessories Designer roles</div>
+      </div>
+    </div>
+    <div class="rv" style="transition-delay:0.18s;">
+      <div class="sk-lbl">Core Competencies</div>
+      <div class="sk-mosaic">
+        <div class="sk-tile"><span>Accessory Design</span></div>
+        <div class="sk-tile"><span>Pattern Making</span></div>
+        <div class="sk-tile"><span>Prototyping</span></div>
+        <div class="sk-tile"><span>Trend Forecasting</span></div>
+        <div class="sk-tile"><span>Leather Craft</span></div>
+        <div class="sk-tile"><span>Material Sourcing</span></div>
+        <div class="sk-tile"><span>Moodboarding</span></div>
+        <div class="sk-tile"><span>Art Direction</span></div>
+        <div class="sk-tile"><span>Sketching</span></div>
+        <div class="sk-tile"><span>3D Modelling</span></div>
+        <div class="sk-tile"><span>Graphic Design</span></div>
+        <div class="sk-tile"><span>Print Design</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="s-hd rv"><span class="s-n">02 /</span><h2 class="s-t"><em>Experience</em></h2><div class="s-r"></div></div>
+  <div>
+    <div class="exp-row rv">
+      <div class="exp-idx">01</div>
+      <div class="exp-spine"><div class="exp-dot"></div><div class="exp-spine-line"></div></div>
+      <div>
+        <div class="exp-meta"><span class="exp-co">Raw &amp; Rugged Leather Co.</span><span class="exp-date">Jun – Jul 2025</span></div>
+        <div class="exp-role">Accessories Design Intern</div>
+        <ul class="exp-pts">
+          <li>Executed design development and fast prototyping for leather accessories in direct collaboration with artisans.</li>
+          <li>Conducted trend research and market analysis to inform seasonal collection direction.</li>
+          <li>Developed sketches and patterns through iterative sampling rounds, ensuring design accuracy and material integrity.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-row rv">
+      <div class="exp-idx">02</div>
+      <div class="exp-spine"><div class="exp-dot"></div><div class="exp-spine-line"></div></div>
+      <div>
+        <div class="exp-meta"><span class="exp-co">Özel</span><span class="exp-date">Jan – Apr 2025</span></div>
+        <div class="exp-role">Design &amp; Product Development Intern</div>
+        <ul class="exp-pts">
+          <li>Managed end-to-end accessory design workflow including client handling, material sourcing, and print design.</li>
+          <li>Led art direction for product shoots and social media content, maintaining brand visual consistency.</li>
+          <li>Performed trend research and R&amp;D to support new product lines; produced detailed sketches and prototypes.</li>
+          <li>Created pattern making and sampling documentation for production handoff.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-row rv">
+      <div class="exp-idx">03</div>
+      <div class="exp-spine"><div class="exp-dot"></div><div class="exp-spine-line"></div></div>
+      <div>
+        <div class="exp-meta"><span class="exp-co">Agam Design Studio</span><span class="exp-date">Jun – Jul 2024</span></div>
+        <div class="exp-role">Design Development Intern</div>
+        <ul class="exp-pts">
+          <li>Contributed to brand study, market research, and trend research for lifestyle and furniture product lines.</li>
+          <li>Produced catalogue designs and 3D models; participated in interior styling and client presentations.</li>
+          <li>Gained hands-on experience in woodworking and furniture design within a multidisciplinary studio.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-row rv">
+      <div class="exp-idx">04</div>
+      <div class="exp-spine"><div class="exp-dot"></div><div class="exp-spine-line"></div></div>
+      <div>
+        <div class="exp-meta"><span class="exp-co">Hidesign</span><span class="exp-date">Jan – May 2024</span></div>
+        <div class="exp-role">Design Intern — Bags &amp; Accessories</div>
+        <ul class="exp-pts">
+          <li>Assisted in trend forecasting, fashion illustration, and design development for premium leather accessories.</li>
+          <li>Contributed to prototyping and pattern making, supporting the product team from concept to sample.</li>
+          <li>Conducted brand study and market benchmarking to align designs with Hidesign's positioning.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-row rv">
+      <div class="exp-idx">05</div>
+      <div class="exp-spine"><div class="exp-dot"></div><div class="exp-spine-line"></div></div>
+      <div>
+        <div class="exp-meta"><span class="exp-co">Kolhapuri Chappal Craft Cluster</span><span class="exp-date">Jun 2023 – Jun 2024</span></div>
+        <div class="exp-role">Craft Research &amp; Design Intern</div>
+        <ul class="exp-pts">
+          <li>Conducted qualitative research on Kolhapuri Chappal craft heritage; performed SWOT analysis and gap identification.</li>
+          <li>Developed culturally-informed accessory designs through artisanal interaction and hands-on leather work.</li>
+          <li>Executed market research, sketching, prototyping, pattern making, and sampling within a craft-cluster context.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-row rv">
+      <div class="exp-idx">06</div>
+      <div class="exp-spine"><div class="exp-dot"></div><div class="exp-spine-line"></div></div>
+      <div>
+        <div class="exp-meta"><span class="exp-co">Xee Design</span><span class="exp-date">Jul – Aug 2023</span></div>
+        <div class="exp-role">Graphic Design Intern</div>
+        <ul class="exp-pts"><li>Designed marketing collateral including brochures, flyers, and product catalogues.</li></ul>
+      </div>
+    </div>
+    <div class="exp-row rv">
+      <div class="exp-idx">07</div>
+      <div class="exp-spine"><div class="exp-dot"></div></div>
+      <div>
+        <div class="exp-meta"><span class="exp-co">Thrilleasy Private Limited</span><span class="exp-date">Jun – Jul 2022</span></div>
+        <div class="exp-role">Design &amp; Marketing Intern</div>
+        <ul class="exp-pts"><li>Created social media content and graphic design assets supporting digital marketing campaigns.</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="s-hd rv"><span class="s-n">03 /</span><h2 class="s-t">Tools &amp; <em>Software</em></h2><div class="s-r"></div></div>
+  <div class="tools-wrap rv">
+    <div class="t-pill"><span>Adobe Photoshop</span></div>
+    <div class="t-pill"><span>Adobe Illustrator</span></div>
+    <div class="t-pill"><span>Adobe InDesign</span></div>
+    <div class="t-pill"><span>Adobe Lightroom</span></div>
+    <div class="t-pill"><span>Adobe Acrobat</span></div>
+    <div class="t-pill"><span>Figma</span></div>
+    <div class="t-pill"><span>Fusion 360</span></div>
+    <div class="t-pill"><span>Blender</span></div>
+    <div class="t-pill"><span>Procreate</span></div>
+  </div>
+  <div class="lang-sec rv">
+    <div class="lang-lbl">Languages</div>
+    <div class="lang-row">
+      <div class="lang-p">English</div>
+      <div class="lang-p">Malayalam</div>
+      <div class="lang-p">Hindi</div>
+      <div class="lang-p">Tamil</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="s-hd rv"><span class="s-n">04 /</span><h2 class="s-t"><em>Education</em></h2><div class="s-r"></div></div>
+  <div class="edu-grid">
+    <div class="edu-card rv">
+      <div class="edu-deg">Bachelor of Design <em>(B.Des)</em></div>
+      <div class="edu-inst">National Institute of Fashion Technology<br>Mumbai, India &nbsp;·&nbsp; 2021 – 2025</div>
+      <div class="edu-yr">25</div>
+    </div>
+    <div class="edu-card rv" style="transition-delay:0.16s;">
+      <div class="edu-deg">Higher Secondary <em>Science</em></div>
+      <div class="edu-inst">Sri Sri Ravi Shankar Vidya Mandir<br>Kerala, India &nbsp;·&nbsp; 2010 – 2021</div>
+      <div class="edu-yr">21</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="s-hd rv"><span class="s-n">05 /</span><h2 class="s-t">Let's <em>Connect</em></h2><div class="s-r"></div></div>
+  <div class="ct-grid">
+    <div class="ct-pull rv">Open to Graphic Designer, Freelance Photographer, and Accessories Designer roles — let's make something worth holding.</div>
+    <div class="rv" style="transition-delay:0.18s;">
+      <div class="ct-list">
+        <div class="ct-item"><span class="ct-lbl">Email</span><a href="mailto:sanandanjana2003@gmail.com" class="ct-val">sanandanjana2003@gmail.com</a></div>
+        <div class="ct-item"><span class="ct-lbl">Phone</span><a href="tel:+917356977113" class="ct-val">+91 7356 977113</a></div>
+        <div class="ct-item"><span class="ct-lbl">Location</span><span class="ct-val">Kharghar, Navi Mumbai</span></div>
+        <div class="ct-item"><span class="ct-lbl">LinkedIn</span><a href="https://www.linkedin.com/in/anjana-s-anand" target="_blank" rel="noopener" class="ct-val">linkedin.com/in/anjana-s-anand</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-logo">ASA</div>
+  <span>Accessories &amp; Lifestyle Design</span>
+  <span>© 2025 Anjana S Anand</span>
+</footer>
+
+<script>
+/* LOADER */
+window.addEventListener('DOMContentLoaded',()=>{
+  const bar=document.getElementById('lbar');
+  const loader=document.getElementById('loader');
+  setTimeout(()=>{bar.style.width='100%';},60);
+  setTimeout(()=>{loader.classList.add('gone');},1900);
+});
+
+/* CURSOR */
+const cur=document.getElementById('cur');
+const cr=document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+});
+(function t(){rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(t);})();
+
+/* NAV */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('solid',window.scrollY>50));
+
+/* HAMBURGER */
+const hbg=document.getElementById('hbg');
+const nl=document.getElementById('nl');
+hbg.addEventListener('click',()=>nl.classList.toggle('open'));
+nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nl.classList.remove('open')));
+
+/* REVEAL */
+const rvs=document.querySelectorAll('.rv');
+const ob=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');ob.unobserve(e.target);}});},{threshold:0.1});
+rvs.forEach(el=>ob.observe(el));
+</script>
+</body>
+</html>
