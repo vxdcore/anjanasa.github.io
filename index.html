@@ -19,17 +19,14 @@
 html{scroll-behavior:smooth;}
 body{background:var(--ink);color:var(--cream);font-family:'DM Mono',monospace;font-size:12px;line-height:1.7;overflow-x:hidden;cursor:none;}
 
-/* CURSOR */
 #cur{position:fixed;width:6px;height:6px;background:var(--amber);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
 #cur-r{position:fixed;width:28px;height:28px;border:1px solid rgba(193,123,58,0.45);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,border-color 0.3s;}
 body:has(a:hover) #cur-r,body:has(button:hover) #cur-r{width:52px;height:52px;border-color:var(--amber);}
 
-/* GRAIN */
 .grain{position:fixed;inset:0;z-index:8000;pointer-events:none;opacity:0.055;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:200px;}
 
-/* LOADER */
 #loader{position:fixed;inset:0;background:var(--ink);z-index:7000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:32px;transition:opacity 0.9s ease,visibility 0.9s;}
 #loader.gone{opacity:0;visibility:hidden;}
 .l-name{font-family:'Cormorant',serif;font-size:clamp(56px,10vw,110px);font-weight:300;font-style:italic;color:var(--amber);letter-spacing:0.04em;}
@@ -37,11 +34,10 @@ body:has(a:hover) #cur-r,body:has(button:hover) #cur-r{width:52px;height:52px;bo
 .l-fill{height:1px;background:var(--amber);width:0;transition:width 1.5s ease;}
 .l-sub{font-size:8px;letter-spacing:0.42em;text-transform:uppercase;color:var(--lite);}
 
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:30px 72px;transition:all 0.5s;}
 nav.solid{background:rgba(14,11,8,0.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(184,154,90,0.1);padding:18px 72px;}
 .nav-logo{font-family:'Cinzel',serif;font-size:13px;letter-spacing:0.24em;color:var(--cream);text-decoration:none;}
-.nav-links{display:flex;gap:44px;list-style:none;}
+.nav-links{display:flex;gap:36px;list-style:none;}
 .nav-links a{text-decoration:none;color:var(--lite);font-size:8.5px;letter-spacing:0.32em;text-transform:uppercase;transition:color 0.3s;position:relative;}
 .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--amber);transition:width 0.3s;}
 .nav-links a:hover{color:var(--amber);}
@@ -49,7 +45,6 @@ nav.solid{background:rgba(14,11,8,0.9);backdrop-filter:blur(20px);-webkit-backdr
 .hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:none;padding:4px;}
 .hbg span{display:block;width:22px;height:1px;background:var(--cream);transition:all 0.3s;}
 
-/* HERO */
 .hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:flex-end;}
 .h-glow{position:absolute;width:900px;height:900px;background:radial-gradient(ellipse,rgba(122,59,30,0.3) 0%,transparent 65%);top:-300px;right:-300px;pointer-events:none;}
 .h-glow2{position:absolute;width:600px;height:600px;background:radial-gradient(ellipse,rgba(193,123,58,0.1) 0%,transparent 70%);bottom:-100px;left:0;pointer-events:none;}
@@ -77,14 +72,12 @@ nav.solid{background:rgba(14,11,8,0.9);backdrop-filter:blur(20px);-webkit-backdr
 .deco-t:hover{border-color:var(--amber);color:var(--amber);}
 .deco-yr{font-family:'Cormorant',serif;font-size:44px;font-weight:300;color:var(--amber);opacity:0.08;position:absolute;bottom:10px;right:14px;line-height:1;}
 
-/* MARQUEE */
 .mq-wrap{overflow:hidden;border-top:1px solid rgba(184,154,90,0.08);border-bottom:1px solid rgba(184,154,90,0.08);padding:16px 0;background:rgba(255,255,255,0.015);}
 .mq{display:flex;gap:64px;white-space:nowrap;animation:mq 30s linear infinite;width:max-content;}
 .mq-i{display:flex;align-items:center;gap:28px;font-size:8.5px;letter-spacing:0.32em;text-transform:uppercase;color:var(--muted);}
 .mq-dot{width:3px;height:3px;border-radius:50%;background:var(--amber);flex-shrink:0;}
 @keyframes mq{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
-/* SECTION */
 section{padding:130px 80px;}
 .s-hd{display:flex;align-items:baseline;gap:28px;margin-bottom:90px;}
 .s-n{font-size:8.5px;letter-spacing:0.32em;color:var(--amber);text-transform:uppercase;flex-shrink:0;}
@@ -94,7 +87,6 @@ section{padding:130px 80px;}
 .rv{opacity:0;transform:translateY(40px);transition:opacity 0.9s cubic-bezier(0.22,1,0.36,1),transform 0.9s cubic-bezier(0.22,1,0.36,1);}
 .rv.on{opacity:1;transform:none;}
 
-/* ABOUT */
 #about{background:var(--ink2);position:relative;overflow:hidden;}
 #about::before{content:'ABOUT';position:absolute;right:-80px;top:50%;transform:translateY(-50%);font-family:'Cormorant',serif;font-size:240px;font-weight:300;color:transparent;-webkit-text-stroke:1px rgba(184,154,90,0.04);pointer-events:none;white-space:nowrap;user-select:none;}
 .ab-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start;}
@@ -110,8 +102,36 @@ section{padding:130px 80px;}
 .sk-tile:hover::after{transform:translateY(0);}
 .sk-tile:hover span{color:var(--ink);}
 
-/* EXPERIENCE */
-#experience{background:var(--ink);}
+/* ====== PROJECTS ====== */
+#projects{background:var(--ink);position:relative;overflow:hidden;}
+#projects::before{content:'WORK';position:absolute;right:-60px;top:50%;transform:translateY(-50%);font-family:'Cormorant',serif;font-size:240px;font-weight:300;color:transparent;-webkit-text-stroke:1px rgba(184,154,90,0.04);pointer-events:none;white-space:nowrap;user-select:none;}
+
+.proj-filter{display:flex;gap:8px;margin-bottom:56px;flex-wrap:wrap;}
+.pf-btn{padding:9px 22px;border:1px solid rgba(184,154,90,0.18);font-size:8px;letter-spacing:0.22em;text-transform:uppercase;color:var(--lite);background:none;cursor:none;transition:all 0.3s;font-family:'DM Mono',monospace;}
+.pf-btn.active,.pf-btn:hover{border-color:var(--amber);color:var(--amber);}
+
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.proj-card{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--ink2);cursor:none;}
+.proj-card.hidden{display:none;}
+.proj-thumb{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.7s cubic-bezier(0.22,1,0.36,1),filter 0.5s;}
+.proj-card:hover .proj-thumb{transform:scale(1.08);filter:brightness(0.4);}
+.proj-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:28px 24px;opacity:0;transition:opacity 0.4s;}
+.proj-card:hover .proj-overlay{opacity:1;}
+.proj-title{font-family:'Cormorant',serif;font-size:20px;font-weight:400;color:var(--cream);line-height:1.2;margin-bottom:10px;}
+.proj-meta{display:flex;align-items:center;justify-content:space-between;}
+.proj-views{font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--lite);}
+.proj-link{display:inline-flex;align-items:center;gap:8px;font-size:8px;letter-spacing:0.22em;text-transform:uppercase;color:var(--amber);text-decoration:none;border-bottom:1px solid rgba(193,123,58,0.3);padding-bottom:1px;transition:border-color 0.3s;}
+.proj-link:hover{border-color:var(--amber);}
+.proj-num{position:absolute;top:16px;left:18px;font-family:'Cormorant',serif;font-size:11px;font-weight:300;font-style:italic;color:rgba(184,154,90,0.5);}
+
+.behance-cta{margin-top:48px;display:flex;align-items:center;justify-content:center;}
+.behance-btn{display:inline-flex;align-items:center;gap:14px;text-decoration:none;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;padding:18px 44px;border:1px solid rgba(184,154,90,0.3);color:var(--lite);transition:all 0.4s;position:relative;overflow:hidden;}
+.behance-btn::before{content:'';position:absolute;inset:0;background:var(--amber);transform:translateX(-100%);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1);z-index:0;}
+.behance-btn:hover::before{transform:translateX(0);}
+.behance-btn:hover{color:var(--ink);border-color:var(--amber);}
+.behance-btn span{position:relative;z-index:1;}
+
+#experience{background:var(--ink2);}
 .exp-row{display:grid;grid-template-columns:44px 1px 1fr;gap:0 38px;padding:54px 0;border-bottom:1px solid rgba(184,154,90,0.07);}
 .exp-row:first-child{border-top:1px solid rgba(184,154,90,0.07);}
 .exp-idx{font-family:'Cormorant',serif;font-size:11px;font-weight:300;font-style:italic;color:rgba(184,154,90,0.25);padding-top:4px;}
@@ -128,8 +148,7 @@ section{padding:130px 80px;}
 .exp-pts li{font-size:11.5px;color:var(--muted);line-height:1.9;padding-left:20px;position:relative;}
 .exp-pts li::before{content:'↳';position:absolute;left:0;color:rgba(184,154,90,0.35);font-size:10px;}
 
-/* TOOLS */
-#tools{background:var(--ink2);position:relative;overflow:hidden;}
+#tools{background:var(--ink);position:relative;overflow:hidden;}
 #tools::before{content:'';position:absolute;width:650px;height:650px;border-radius:50%;background:radial-gradient(ellipse,rgba(122,59,30,0.18) 0%,transparent 70%);bottom:-250px;right:-150px;pointer-events:none;}
 .tools-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:60px;}
 .t-pill{padding:14px 26px;border:1px solid rgba(184,154,90,0.18);font-size:8.5px;letter-spacing:0.22em;text-transform:uppercase;color:var(--lite);position:relative;overflow:hidden;cursor:default;transition:color 0.35s,border-color 0.35s;}
@@ -142,10 +161,9 @@ section{padding:130px 80px;}
 .lang-row{display:flex;gap:6px;flex-wrap:wrap;}
 .lang-p{padding:9px 22px;border:1px solid rgba(184,154,90,0.1);font-size:8.5px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(160,136,112,0.5);}
 
-/* EDUCATION */
-#education{background:var(--ink);}
+#education{background:var(--ink2);}
 .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
-.edu-card{position:relative;overflow:hidden;padding:64px 54px;border:1px solid rgba(184,154,90,0.08);cursor:default;isolation:isolate;background:var(--ink2);}
+.edu-card{position:relative;overflow:hidden;padding:64px 54px;border:1px solid rgba(184,154,90,0.08);cursor:default;isolation:isolate;background:var(--ink);}
 .edu-card::after{content:'';position:absolute;inset:0;background:var(--rust);transform:translateY(101%);transition:transform 0.65s cubic-bezier(0.22,1,0.36,1);z-index:0;}
 .edu-card:hover::after{transform:translateY(0);}
 .edu-card>*{position:relative;z-index:1;}
@@ -157,8 +175,7 @@ section{padding:130px 80px;}
 .edu-yr{font-family:'Cormorant',serif;font-size:92px;font-weight:300;color:var(--amber);opacity:0.07;position:absolute;bottom:12px;right:24px;line-height:1;transition:all 0.3s;}
 .edu-card:hover .edu-yr{opacity:0.15;color:var(--cream);}
 
-/* CONTACT */
-#contact{background:var(--ink2);position:relative;overflow:hidden;}
+#contact{background:var(--ink);position:relative;overflow:hidden;}
 #contact::before{content:'';position:absolute;width:750px;height:750px;border-radius:50%;background:radial-gradient(ellipse,rgba(122,59,30,0.22) 0%,transparent 70%);top:-350px;left:-250px;pointer-events:none;}
 .ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start;}
 .ct-pull{font-family:'Cormorant',serif;font-size:clamp(24px,3vw,38px);font-weight:300;font-style:italic;color:var(--sand);line-height:1.6;position:relative;padding-left:34px;}
@@ -170,14 +187,12 @@ section{padding:130px 80px;}
 .ct-val{font-size:14px;color:var(--cream);text-decoration:none;transition:color 0.3s;letter-spacing:0.02em;}
 .ct-val:hover{color:var(--amber);}
 
-/* FOOTER */
-footer{background:var(--ink);border-top:1px solid rgba(184,154,90,0.08);padding:40px 80px;display:flex;justify-content:space-between;align-items:center;}
+footer{background:var(--ink2);border-top:1px solid rgba(184,154,90,0.08);padding:40px 80px;display:flex;justify-content:space-between;align-items:center;}
 .ft-logo{font-family:'Cinzel',serif;font-size:13px;letter-spacing:0.24em;color:var(--amber);}
 footer span{font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(32px);}to{opacity:1;transform:translateY(0);}}
 
-/* RESPONSIVE */
 @media(max-width:960px){
   nav{padding:22px 36px;}nav.solid{padding:15px 36px;}
   .nav-links{display:none;}
@@ -189,8 +204,12 @@ footer span{font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:
   .h-vert{display:none;}
   section{padding:90px 32px;}
   .ab-grid,.edu-grid,.ct-grid{grid-template-columns:1fr;gap:60px;}
+  .proj-grid{grid-template-columns:1fr 1fr;}
   .exp-row{grid-template-columns:32px 1px 1fr;gap:0 22px;}
   footer{flex-direction:column;gap:12px;padding:28px 32px;text-align:center;}
+}
+@media(max-width:580px){
+  .proj-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -200,18 +219,17 @@ footer span{font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:
 <div id="cur-r"></div>
 <div class="grain"></div>
 
-<!-- LOADER -->
 <div id="loader">
   <div class="l-name">ASA</div>
   <div class="l-bar"><div class="l-fill" id="lbar"></div></div>
   <div class="l-sub">Loading portfolio</div>
 </div>
 
-<!-- NAV -->
 <nav id="nav">
   <a href="#home" class="nav-logo">Anjana S Anand</a>
   <ul class="nav-links" id="nl">
     <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#tools">Tools</a></li>
     <li><a href="#education">Education</a></li>
@@ -220,7 +238,6 @@ footer span{font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:
   <button class="hbg" id="hbg" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="home">
   <div class="h-glow"></div>
   <div class="h-glow2"></div>
@@ -228,15 +245,12 @@ footer span{font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:
   <div class="h-vert">Industrial &amp; Accessory Design · Mumbai</div>
   <div class="h-content">
     <div>
-      <div class="h-eyebrow">
-        <div class="h-dash"></div>
-        <span class="h-tag">Industrial &amp; Accessory Designer</span>
-      </div>
+      <div class="h-eyebrow"><div class="h-dash"></div><span class="h-tag">Industrial &amp; Accessory Designer</span></div>
       <h1 class="h-name">Anjana<em>S Anand</em></h1>
       <p class="h-sub">NIFT Mumbai &nbsp;·&nbsp; Class of 2025</p>
       <p class="h-desc">Creative designer with 3+ years across fashion accessories, leather goods, and lifestyle products — from trend research and concept sketching to prototyping and production handoff.</p>
       <div class="h-btns">
-        <a href="#experience" class="btn-fill">View Experience</a>
+        <a href="#projects" class="btn-fill">View Projects</a>
         <a href="#contact" class="btn-line">Get in Touch →</a>
       </div>
     </div>
@@ -256,9 +270,8 @@ footer span{font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:
   </div>
 </section>
 
-<!-- MARQUEE -->
 <div class="mq-wrap">
-  <div class="mq" id="mq">
+  <div class="mq">
     <div class="mq-i"><span>Accessories Design</span><div class="mq-dot"></div></div>
     <div class="mq-i"><span>Leather Craft</span><div class="mq-dot"></div></div>
     <div class="mq-i"><span>Trend Forecasting</span><div class="mq-dot"></div></div>
@@ -280,7 +293,6 @@ footer span{font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:
   </div>
 </div>
 
-<!-- ABOUT -->
 <section id="about">
   <div class="s-hd rv"><span class="s-n">01 /</span><h2 class="s-t">About <em>Me</em></h2><div class="s-r"></div></div>
   <div class="ab-grid">
@@ -313,9 +325,174 @@ footer span{font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:
   </div>
 </section>
 
-<!-- EXPERIENCE -->
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="s-hd rv"><span class="s-n">02 /</span><h2 class="s-t">Selected <em>Projects</em></h2><div class="s-r"></div></div>
+
+  <div class="proj-filter rv" id="filterBar">
+    <button class="pf-btn active" data-cat="all">All</button>
+    <button class="pf-btn" data-cat="leather">Leather & Accessories</button>
+    <button class="pf-btn" data-cat="craft">Craft & Research</button>
+    <button class="pf-btn" data-cat="visual">Visual & Print</button>
+  </div>
+
+  <div class="proj-grid rv" id="projGrid">
+
+    <a class="proj-card" href="https://www.behance.net/gallery/239133939/Mobility-Gear-Design-raw-rugged" target="_blank" rel="noopener" data-cat="leather">
+      <span class="proj-num">01</span>
+      <img class="proj-thumb" src="images/project-01.jpg" alt="Mobility Gear Design" loading="lazy">
+      <div class="proj-overlay">
+        <div class="proj-title">Mobility Gear Design @raw&amp;rugged</div>
+        <div class="proj-meta">
+          <span class="proj-views">3,434 views · 11 appreciations</span>
+          <span class="proj-link"><span>View →</span></span>
+        </div>
+      </div>
+    </a>
+
+    <a class="proj-card" href="https://www.behance.net/gallery/238029873/Metamorphosis" target="_blank" rel="noopener" data-cat="visual">
+      <span class="proj-num">02</span>
+      <img class="proj-thumb" src="images/project-02.jpg" alt="Metamorphosis" loading="lazy">
+      <div class="proj-overlay">
+        <div class="proj-title">Metamorphosis</div>
+        <div class="proj-meta">
+          <span class="proj-views">9 views</span>
+          <span class="proj-link"><span>View →</span></span>
+        </div>
+      </div>
+    </a>
+
+    <a class="proj-card" href="https://www.behance.net/gallery/237213793/-kasera" target="_blank" rel="noopener" data-cat="craft">
+      <span class="proj-num">03</span>
+      <img class="proj-thumb" src="images/project-03.png" alt="മ്മ kasera" loading="lazy">
+      <div class="proj-overlay">
+        <div class="proj-title">മ്മ kasera</div>
+        <div class="proj-meta">
+          <span class="proj-views">24 views</span>
+          <span class="proj-link"><span>View →</span></span>
+        </div>
+      </div>
+    </a>
+
+    <a class="proj-card" href="https://www.behance.net/gallery/230578657/Graduation-Project-at-OEzel-Hyderabad" target="_blank" rel="noopener" data-cat="leather">
+      <span class="proj-num">04</span>
+      <img class="proj-thumb" src="images/project-04.png" alt="Graduation Project at Özel" loading="lazy">
+      <div class="proj-overlay">
+        <div class="proj-title">Graduation Project at Özel, Hyderabad</div>
+        <div class="proj-meta">
+          <span class="proj-views">33 views</span>
+          <span class="proj-link"><span>View →</span></span>
+        </div>
+      </div>
+    </a>
+
+    <a class="proj-card" href="https://www.behance.net/gallery/232204079/Ardmore-Prints" target="_blank" rel="noopener" data-cat="visual">
+      <span class="proj-num">05</span>
+      <img class="proj-thumb" src="images/project-05.png" alt="Ardmore Prints" loading="lazy">
+      <div class="proj-overlay">
+        <div class="proj-title">Ardmore Prints</div>
+        <div class="proj-meta">
+          <span class="proj-views">16 views</span>
+          <span class="proj-link"><span>View →</span></span>
+        </div>
+      </div>
+    </a>
+
+    <a class="proj-card" href="https://www.behance.net/gallery/223984233/Primavera" target="_blank" rel="noopener" data-cat="visual">
+      <span class="proj-num">06</span>
+      <img class="proj-thumb" src="images/project-06.jpg" alt="Primavera" loading="lazy">
+      <div class="proj-overlay">
+        <div class="proj-title">Primavera</div>
+        <div class="proj-meta">
+          <span class="proj-views">36 views · 1 appreciation</span>
+          <span class="proj-link"><span>View →</span></span>
+        </div>
+      </div>
+    </a>
+
+    <a class="proj-card" href="https://www.behance.net/gallery/212271699/Hidesign-(Lightroom-Project)" target="_blank" rel="noopener" data-cat="visual">
+      <span class="proj-num">07</span>
+      <img class="proj-thumb" src="images/project-07.png" alt="Hidesign Lightroom Project" loading="lazy">
+      <div class="proj-overlay">
+        <div class="proj-title">Hidesign (Lightroom Project)</div>
+        <div class="proj-meta">
+          <span class="proj-views">62 views · 1 appreciation</span>
+          <span class="proj-link"><span>View →</span></span>
+        </div>
+      </div>
+    </a>
+
+    <a class="proj-card" href="https://www.behance.net/gallery/208067453/Kolhapuri-Craft-Documentation" target="_blank" rel="noopener" data-cat="craft">
+      <span class="proj-num">08</span>
+      <img class="proj-thumb" src="images/project-08.jpg" alt="Kolhapuri Craft Documentation" loading="lazy">
+      <div class="proj-overlay">
+        <div class="proj-title">Kolhapuri Craft Documentation</div>
+        <div class="proj-meta">
+          <span class="proj-views">514 views · 12 appreciations</span>
+          <span class="proj-link"><span>View →</span></span>
+        </div>
+      </div>
+    </a>
+
+    <a class="proj-card" href="https://www.behance.net/gallery/198885331/Quilted-letter-top-handle-bag" target="_blank" rel="noopener" data-cat="leather">
+      <span class="proj-num">09</span>
+      <img class="proj-thumb" src="images/project-09.png" alt="Quilted-letter top handle bag" loading="lazy">
+      <div class="proj-overlay">
+        <div class="proj-title">Quilted-letter Top Handle Bag</div>
+        <div class="proj-meta">
+          <span class="proj-views">74 views · 2 appreciations</span>
+          <span class="proj-link"><span>View →</span></span>
+        </div>
+      </div>
+    </a>
+
+    <a class="proj-card" href="https://www.behance.net/gallery/198844035/Essential-leather-pouch" target="_blank" rel="noopener" data-cat="leather">
+      <span class="proj-num">10</span>
+      <img class="proj-thumb" src="images/project-10.png" alt="Essential leather pouch" loading="lazy">
+      <div class="proj-overlay">
+        <div class="proj-title">Essential Leather Pouch</div>
+        <div class="proj-meta">
+          <span class="proj-views">62 views · 2 appreciations</span>
+          <span class="proj-link"><span>View →</span></span>
+        </div>
+      </div>
+    </a>
+
+    <a class="proj-card" href="https://www.behance.net/gallery/199157577/The-Cage-Of-Melkkoyma(dominance)" target="_blank" rel="noopener" data-cat="leather">
+      <span class="proj-num">11</span>
+      <img class="proj-thumb" src="images/project-11.png" alt="The Cage Of Melkkoyma" loading="lazy">
+      <div class="proj-overlay">
+        <div class="proj-title">The Cage Of Melkkoyma</div>
+        <div class="proj-meta">
+          <span class="proj-views">38 views</span>
+          <span class="proj-link"><span>View →</span></span>
+        </div>
+      </div>
+    </a>
+
+    <a class="proj-card" href="https://www.behance.net/gallery/211794049/Internship-Document" target="_blank" rel="noopener" data-cat="craft">
+      <span class="proj-num">12</span>
+      <img class="proj-thumb" src="images/project-12.jpg" alt="Internship Document" loading="lazy">
+      <div class="proj-overlay">
+        <div class="proj-title">Internship Document</div>
+        <div class="proj-meta">
+          <span class="proj-views">44 views</span>
+          <span class="proj-link"><span>View →</span></span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="behance-cta rv">
+    <a href="https://www.behance.net/anjanasanand03" target="_blank" rel="noopener" class="behance-btn">
+      <span>View Full Behance Profile →</span>
+    </a>
+  </div>
+</section>
+
 <section id="experience">
-  <div class="s-hd rv"><span class="s-n">02 /</span><h2 class="s-t"><em>Experience</em></h2><div class="s-r"></div></div>
+  <div class="s-hd rv"><span class="s-n">03 /</span><h2 class="s-t"><em>Experience</em></h2><div class="s-r"></div></div>
   <div>
     <div class="exp-row rv">
       <div class="exp-idx">01</div>
@@ -404,9 +581,8 @@ footer span{font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:
   </div>
 </section>
 
-<!-- TOOLS -->
 <section id="tools">
-  <div class="s-hd rv"><span class="s-n">03 /</span><h2 class="s-t">Tools &amp; <em>Software</em></h2><div class="s-r"></div></div>
+  <div class="s-hd rv"><span class="s-n">04 /</span><h2 class="s-t">Tools &amp; <em>Software</em></h2><div class="s-r"></div></div>
   <div class="tools-wrap rv">
     <div class="t-pill"><span>Adobe Photoshop</span></div>
     <div class="t-pill"><span>Adobe Illustrator</span></div>
@@ -429,9 +605,8 @@ footer span{font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:
   </div>
 </section>
 
-<!-- EDUCATION -->
 <section id="education">
-  <div class="s-hd rv"><span class="s-n">04 /</span><h2 class="s-t"><em>Education</em></h2><div class="s-r"></div></div>
+  <div class="s-hd rv"><span class="s-n">05 /</span><h2 class="s-t"><em>Education</em></h2><div class="s-r"></div></div>
   <div class="edu-grid">
     <div class="edu-card rv">
       <div class="edu-deg">Bachelor of Design <em>(B.Des)</em></div>
@@ -446,9 +621,8 @@ footer span{font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
-  <div class="s-hd rv"><span class="s-n">05 /</span><h2 class="s-t">Let's <em>Connect</em></h2><div class="s-r"></div></div>
+  <div class="s-hd rv"><span class="s-n">06 /</span><h2 class="s-t">Let's <em>Connect</em></h2><div class="s-r"></div></div>
   <div class="ct-grid">
     <div class="ct-pull rv">Open to Graphic Designer, Freelance Photographer, and Accessories Designer roles — let's make something worth holding.</div>
     <div class="rv" style="transition-delay:0.18s;">
@@ -457,6 +631,7 @@ footer span{font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:
         <div class="ct-item"><span class="ct-lbl">Phone</span><a href="tel:+917356977113" class="ct-val">+91 7356 977113</a></div>
         <div class="ct-item"><span class="ct-lbl">Location</span><span class="ct-val">Kharghar, Navi Mumbai</span></div>
         <div class="ct-item"><span class="ct-lbl">LinkedIn</span><a href="https://www.linkedin.com/in/anjana-s-anand" target="_blank" rel="noopener" class="ct-val">linkedin.com/in/anjana-s-anand</a></div>
+        <div class="ct-item"><span class="ct-lbl">Behance</span><a href="https://www.behance.net/anjanasanand03" target="_blank" rel="noopener" class="ct-val">behance.net/anjanasanand03</a></div>
       </div>
     </div>
   </div>
@@ -469,7 +644,6 @@ footer span{font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:
 </footer>
 
 <script>
-/* LOADER */
 window.addEventListener('DOMContentLoaded',()=>{
   const bar=document.getElementById('lbar');
   const loader=document.getElementById('loader');
@@ -477,30 +651,35 @@ window.addEventListener('DOMContentLoaded',()=>{
   setTimeout(()=>{loader.classList.add('gone');},1900);
 });
 
-/* CURSOR */
 const cur=document.getElementById('cur');
 const cr=document.getElementById('cur-r');
 let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{
-  mx=e.clientX;my=e.clientY;
-  cur.style.left=mx+'px';cur.style.top=my+'px';
-});
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
 (function t(){rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(t);})();
 
-/* NAV */
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('solid',window.scrollY>50));
 
-/* HAMBURGER */
 const hbg=document.getElementById('hbg');
 const nl=document.getElementById('nl');
 hbg.addEventListener('click',()=>nl.classList.toggle('open'));
 nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nl.classList.remove('open')));
 
-/* REVEAL */
 const rvs=document.querySelectorAll('.rv');
-const ob=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');ob.unobserve(e.target);}});},{threshold:0.1});
+const ob=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');ob.unobserve(e.target);}});},{threshold:0.08});
 rvs.forEach(el=>ob.observe(el));
+
+document.getElementById('filterBar').addEventListener('click',e=>{
+  const btn=e.target.closest('.pf-btn');
+  if(!btn)return;
+  document.querySelectorAll('.pf-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const cat=btn.dataset.cat;
+  document.querySelectorAll('.proj-card').forEach(card=>{
+    if(cat==='all'||card.dataset.cat===cat){card.classList.remove('hidden');}
+    else{card.classList.add('hidden');}
+  });
+});
 </script>
 </body>
 </html>
